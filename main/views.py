@@ -14,3 +14,7 @@ def about(request):
 
 def contact(request):
     return render(request, 'main/contact.html')
+
+
+def panel(request):
+    return render(request, 'back/home.html')
