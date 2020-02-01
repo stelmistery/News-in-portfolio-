@@ -164,7 +164,7 @@
                                     <a href="">Add article</a>
                                 </li>
                                 <li>
-                                    <a href="">Articles list</a>
+                                    <a href="{% url 'articles_list' %}">Articles list</a>
                                 </li>
 
                             </ul>
@@ -273,10 +273,10 @@
 <script src="https://maps.googleapis.com/maps/api/js?key="></script>
 <script src="{% static 'back/js/helpers/gmaps.min.js' %}"></script>
 
+{% block footerblock %}
+{% endblock %}
+
 <!-- Load and execute javascript code used only in this page -->
-<script src="{% static 'back/js/pages/index.js' %}"></script>
-<script>$(function () {
-    Index.init();
-});</script>
+
 </body>
 </html>
