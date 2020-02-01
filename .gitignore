@@ -5,4 +5,6 @@ ignore/
 *.tmp
 /temp
 /tmp
+/venv
+venv/
 
