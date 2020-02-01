@@ -1,0 +1,8 @@
+*.idea
+.ignore
+ignore/
+*.log
+*.tmp
+/temp
+/tmp
+
