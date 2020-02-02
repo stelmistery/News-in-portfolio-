@@ -16,4 +16,4 @@ def articles_list(request):
 
 def articles_add(request):
 
-    return render(request, 'back/articles_list.html')
+    return render(request, 'back/articles_add.html')
