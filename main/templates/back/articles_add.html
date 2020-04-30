@@ -23,33 +23,57 @@
             <div class="block">
                 <!-- Basic Form Elements Title -->
                 <div class="block-title">
-                    <div class="block-options pull-right">
-                        <a href="javascript:void(0)"
-                           class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button"
-                           title="Toggles .form-bordered class">No Borders</a>
-                    </div>
+
                     <h2><strong>Basic Form</strong> Elements</h2>
                 </div>
                 <!-- END Form Elements Title -->
 
                 <!-- Basic Form Elements Content -->
-                <form action="page_forms_general.html" method="post" enctype="multipart/form-data"
-                      class="form-horizontal form-bordered" onsubmit="return false;">
-
+                <form action="{% url "articles_add" %}" method="post" enctype="multipart/form-data"
+                      class="form-horizontal form-bordered">
+                    {% csrf_token %}
                     <div class="form-group">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Article title">
+                            <input type="text" id="newstitle" name="newstitle" class="form-control"
+                                   placeholder="Article title">
                         </div>
+
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder=".col-md-5">
+                            <select id="newscat" name="newscat" data-placeholder="Choose a Category.."
+                                    class="select-chosen">
+                                <option></option>
+                                <!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                                <option value="United States">United States</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Zambia">Zambia</option>
+                                <option value="Zimbabwe">Zimbabwe</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder=".col-md-7">
+                        <div class="col-md-12">
+                            <textarea type="text" id="newstxtshort" name="newstxtshort" class="form-control"
+                                      placeholder="short text"></textarea>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <textarea type="text" id="newstxt" name="newstxt" rows="5" class="form-control"
+                                      placeholder="body"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder=".col-md-5">
+                            <input type="file" id="myfile" name="myfile" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i>
+                                Submit
+                            </button>
                         </div>
                     </div>
 

@@ -551,7 +551,7 @@
                     <!-- Item latest -->
                     <div class="m-b-45">
                         <a href="{% url 'article_det' word=article.name  %}" class="wrap-pic-w hov1 trans-03">
-                            <img src="{% static "front/images/latest-06.jpg" %}" alt="IMG">
+                            <img src="{{ article.picurl }}" alt="IMG">
                         </a>
 
                         <div class="p-t-16">

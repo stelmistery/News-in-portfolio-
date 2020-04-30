@@ -18,3 +18,4 @@ def contact(request):
 
 def panel(request):
     return render(request, 'back/home.html')
+

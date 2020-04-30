@@ -42,13 +42,13 @@
                 {% for cc in articles %}
                 <tr>
                     <td class="text-center">{{ cc.pk }}</td>
-                    <td class="text-center"><img src="{% static 'back/img/placeholders/avatars/avatar15.jpg' %}"
+                    <td class="text-center"><img style="display: inline-block; width: 60px; height: 60px" src="{{ cc.picurl }}"
                                                  alt="avatar" class="img-circle"></td>
                     <td>{{ cc.name }}</td>
                     <td>{{ cc.date }}</td>
-                    <td>-</td>
+                    <td>{{ cc.short_txt }}</td>
                     <td>{{ cc.writer }}</td>
-                    <td>-</td>
+                    <td>{{ cc.show }}</td>
                     <td class="text-center">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"
