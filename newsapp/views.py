@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article
 from django.core.files.storage import FileSystemStorage
+import datetime
+
 
 # Create your views here.
 
@@ -16,6 +18,17 @@ def articles_list(request):
 
 
 def articles_add(request):
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+    day = now.day
+
+    if len(str(day)) == 1:
+        day = '0' + str(day)
+    if len(str(month)) == 1:
+        month = '0' + str(month)
+
+    today = str(year) + '/' + str(month) + '/' + str(day)
     if request.method == 'POST':
         newstitle = request.POST.get('newstitle')
         newscat = request.POST.get('newscat')
@@ -33,16 +46,21 @@ def articles_add(request):
             url = fs.url(filename)
 
             if str(myfile.content_type).startswith('image'):
-                if myfile.size > 5000000:
-                    article = Article(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, catid=0, catname=newscat, date=2019, picname=filename, picurl=url, writer='-')
+                if myfile.size < 5000000:
+                    article = Article(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, catid=0,
+                                      catname=newscat, date=today, picname=filename, picurl=url, writer='-')
                     article.save()
-                    return redirect('articles_add')
+                    return redirect('articles_list')
                 else:
+                    fs.delete(filename)
                     error = "Your file size is bigger than 5MB"
                     return render(request, 'back/error.html', {'error': error})
             else:
+                fs.delete(filename)
                 error = "Your file NOT supported"
                 return render(request, 'back/error.html', {'error': error})
+
+
 
 
         except:
@@ -50,3 +68,15 @@ def articles_add(request):
             return render(request, 'back/error.html', {'error': error})
 
     return render(request, 'back/articles_add.html')
+
+
+def article_del(request, pk):
+    try:
+        a = Article.objects.get(pk=pk)
+        fs = FileSystemStorage()
+        fs.delete(a.picname)
+        a.delete()
+        return redirect('articles_list')
+    except:
+        error = "Somthing wrong"
+        return render(request, 'back/error.html', {'error': error})
