@@ -7,19 +7,19 @@
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Articles List<br><small>you can add, edit and delete your data!</small>
+                <i class="fa fa-table"></i>Sub category List<br><small>you can add, edit and delete your subcategory!</small>
             </h1>
         </div>
     </div>
     <ul class="breadcrumb breadcrumb-top">
-        <li>Articles</li>
+        <li>Sub categories</li>
         <li><a href="{% url 'articles_list' %}">List</a></li>
     </ul>
     <!-- END Datatables Header -->
     <!-- Datatables Content -->
     <div class="block full">
         <div class="block-title">
-            <h2><strong>Articles</strong> List</h2>
+            <h2><strong>Sub categories</strong> List</h2>
         </div>
 
         <div class="table-responsive">
@@ -27,27 +27,20 @@
                 <thead>
                 <tr>
                     <th class="text-center">ID</th>
-                    <th class="text-center">Image</th>
                     <th>Title</th>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Writer</th>
-                    <th>Views</th>
-                    <th>Actions</th>
+                    <th class="text-center">Category</th>
+                    <th class="text-center">Category ID</th>
+                    <th class="text-center">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                {% for cc in articles %}
+                {% for cc in subcats %}
                 <tr>
                     <td class="text-center">{{ cc.pk }}</td>
-                    <td class="text-center"><img style="display: inline-block; width: 60px; height: 60px" src="{{ cc.picurl }}"
-                                                 alt="avatar" class="img-circle"></td>
                     <td>{{ cc.name }}</td>
-                    <td>{{ cc.date }}</td>
                     <td>{{ cc.catname }}</td>
-                    <td>{{ cc.writer }}</td>
-                    <td>{{ cc.show }}</td>
+                    <td>{{ cc.catid }}</td>
                     <td class="text-center">
                         <div class="btn-group">
                             <a href="javascript:void(0)" data-toggle="tooltip" title="Edit"

@@ -18,6 +18,10 @@ def cat_add(request):
             error = 'All fields required'
             return render(request, 'back/error.html', {'error': error})
 
+        if len(Category.objects.filter(name=name)) != 0:
+            error = 'This Name Used Before'
+            return render(request, 'back/error.html', {'error': error})
+
         c = Category(name=name)
         c.save()
         return redirect('cat_list')

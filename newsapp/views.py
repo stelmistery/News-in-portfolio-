@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article
 from django.core.files.storage import FileSystemStorage
 import datetime
+from subcat.models import SubCategory
+from cat.models import Category
 
 
 # Create your views here.
@@ -29,11 +31,15 @@ def articles_add(request):
         month = '0' + str(month)
 
     today = str(year) + '/' + str(month) + '/' + str(day)
+
+    cats = SubCategory.objects.all()
+
     if request.method == 'POST':
         newstitle = request.POST.get('newstitle')
         newscat = request.POST.get('newscat')
         newstxtshort = request.POST.get('newstxtshort')
         newstxt = request.POST.get('newstxt')
+        newsid = request.POST.get('newscat')
 
         if newstitle == "" or newscat == "" or newstxtshort == "" or newstxt == "":
             errors = "All fields required"
@@ -47,8 +53,11 @@ def articles_add(request):
 
             if str(myfile.content_type).startswith('image'):
                 if myfile.size < 5000000:
-                    article = Article(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, catid=0,
-                                      catname=newscat, date=today, picname=filename, picurl=url, writer='-')
+
+                    newsname = SubCategory.objects.get(pk=newsid).name
+
+                    article = Article(name=newstitle, short_txt=newstxtshort, body_txt=newstxt, catid=newsid,
+                                      catname=newsname, date=today, picname=filename, picurl=url, writer='-')
                     article.save()
                     return redirect('articles_list')
                 else:
@@ -67,7 +76,7 @@ def articles_add(request):
             error = "Please input your image"
             return render(request, 'back/error.html', {'error': error})
 
-    return render(request, 'back/articles_add.html')
+    return render(request, 'back/articles_add.html', {'cats': cats})
 
 
 def article_del(request, pk):

@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'cat.apps.CatConfig',
+    'subcat.apps.SubcatConfig',
     'newsapp.apps.NewsappConfig',
     'main.apps.MainConfig',
     'django.contrib.admin',

@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('news/', include('newsapp.urls')),
-    path('category/', include('cat.urls')),
+    path('', include('cat.urls')),
+    path('', include('subcat.urls')),
 
 ]
 if settings.DEBUG:
